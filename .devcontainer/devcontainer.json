@@ -1,5 +1,9 @@
 {
   "image": "mcr.microsoft.com/devcontainers/typescript-node",
   "features": {},
-  "postCreateCommand": "npm install -g bun"
+  "postCreateCommand": "npm install -g bun",
+  "containerEnv": {
+    "HTTP_PROXY": "http://host.docker.internal:7897",
+    "HTTPS_PROXY": "http://host.docker.internal:7897"
+  },
 }
