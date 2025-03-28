@@ -8,16 +8,26 @@
     "NPM_CONFIG_REGISTRY": "https://registry.npmmirror.com",
     "PNPM_CONFIG_REGISTRY": "https://registry.npmmirror.com"
   },
+  "runArgs": [
+    "--add-host=host.docker.internal:host-gateway",
+    "--network=host",
+    "--dns=8.8.8.8",
+    "--dns=114.114.114.114",
+    "--volume=/Library/Keychains:/host-certs:ro",
+    "--volume=${localEnv:HOME}/.config/clash:/usr/local/share/ca-certificates/clash:ro"
+  ],
   "postCreateCommand": [
     "git config --global http.proxy 'http://host.docker.internal:7899'",
     "git config --global https.proxy 'http://host.docker.internal:7899'",
+    "sudo mkdir -p /usr/local/share/ca-certificates/clash",
+    "sudo curl -k http://host.docker.internal:7899/cert -o /usr/local/share/ca-certificates/clash/clash.crt",
+    "sudo cp /host-certs/* /usr/local/share/ca-certificates/",
+    "sudo update-ca-certificates --fresh",
     "npm install -g pnpm@latest-10 --registry=https://registry.npmmirror.com",
     "curl -fsSL https://npmmirror.com/mirrors/bun/sh/install | bash",
     "echo 'export BUN_INSTALL=\"${HOME}/.bun\"' >> ~/.bashrc",
     "echo 'export PATH=\"${BUN_INSTALL}/bin:${PATH}\"' >> ~/.bashrc",
-    "node -v && npm -v && pnpm -v && bun -v",
-    "sudo cp /host-certs/* /usr/local/share/ca-certificates/",
-    "sudo update-ca-certificates --fresh"
+    "node -v && npm -v && pnpm -v && bun -v"
   ],
   "customizations": {
     "vscode": {
@@ -35,12 +45,5 @@
         "bradlc.vscode-tailwindcss"
       ]
     }
-  },
-  "runArgs": [
-    "--add-host=host.docker.internal:host-gateway",
-    "--dns=8.8.8.8",
-    "--dns=114.114.114.114",
-    "--volume=/Library/Keychains:/host-certs:ro", 
-    
-  ]
+  }
 }
