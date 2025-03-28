@@ -9,15 +9,9 @@
      "--add-host=host.docker.internal:host-gateway",
      "--network=host",
      "--dns=8.8.8.8",
-     "--dns=114.114.114.114",
-     "--volume=/Library/Keychains:/host-certs:ro",
-     "--volume=${localEnv:HOME}/.config/clash:/usr/local/share/ca-certificates/clash:ro"
+     "--dns=114.114.114.114"
    ],
    "postCreateCommand": [
-     "sudo mkdir -p /usr/local/share/ca-certificates/clash",
-     "sudo curl -k http://host.docker.internal:7899/cert -o /usr/local/share/ca-certificates/clash/clash.crt",
-     "sudo cp /host-certs/* /usr/local/share/ca-certificates/",
-     "sudo update-ca-certificates --fresh",
      "npm install -g pnpm@latest-10 --registry=https://registry.npmmirror.com",
      "pnpm -v"
    ],
