@@ -11,7 +11,7 @@
      "--dns=8.8.8.8",
      "--dns=114.114.114.114"
    ],
-   "postCreateCommand": "pnpm self-update && pnpm -v && curl -fsSL https://bun.sh/install | bash && source /home/node/.bashrc",
+   "postCreateCommand": "pnpm self-update && pnpm -v && curl -fsSL https://bun.sh/install | bash && source ~/.bashrc",
    "customizations": {
      "vscode": {
        "settings": {
