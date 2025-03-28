@@ -17,8 +17,6 @@
     "--volume=${localEnv:HOME}/.config/clash:/usr/local/share/ca-certificates/clash:ro"
   ],
   "postCreateCommand": [
-    "git config --global http.proxy 'http://host.docker.internal:7899'",
-    "git config --global https.proxy 'http://host.docker.internal:7899'",
     "sudo mkdir -p /usr/local/share/ca-certificates/clash",
     "sudo curl -k http://host.docker.internal:7899/cert -o /usr/local/share/ca-certificates/clash/clash.crt",
     "sudo cp /host-certs/* /usr/local/share/ca-certificates/",
