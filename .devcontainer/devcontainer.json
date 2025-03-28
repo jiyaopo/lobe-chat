@@ -10,7 +10,7 @@
   },
   "postCreateCommand": [
     "git config --global http.proxy 'http://host.docker.internal:7899'",
-    "git config --global https.proxy 'https://host.docker.internal:7899'",
+    "git config --global https.proxy 'http://host.docker.internal:7899'",
     "npm install -g pnpm@latest-10 --registry=https://registry.npmmirror.com",
     "curl -fsSL https://npmmirror.com/mirrors/bun/sh/install | bash",
     "echo 'export BUN_INSTALL=\"${HOME}/.bun\"' >> ~/.bashrc",
