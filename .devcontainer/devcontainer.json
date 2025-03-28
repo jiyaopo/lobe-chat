@@ -1,9 +1,38 @@
 {
+  "name": "TS-Node Production Ready",
   "image": "mcr.microsoft.com/devcontainers/typescript-node",
-  "features": {},
-  "postCreateCommand": "npm install -g bun",
   "containerEnv": {
-    "HTTP_PROXY": "http://host.docker.internal:7897",
-    "HTTPS_PROXY": "http://host.docker.internal:7897"
+    "HTTP_PROXY": "http://host.docker.internal:7899",
+    "HTTPS_PROXY": "http://host.docker.internal:7899",
+    "NO_PROXY": "localhost,127.0.0.1,::1,.docker.internal,192.168.65.0/24",
+    "NPM_CONFIG_REGISTRY": "https://registry.npmmirror.com",
+    "PNPM_CONFIG_REGISTRY": "https://registry.npmmirror.com"
   },
+  "postCreateCommand": [
+    "npm install -g pnpm@latest-10 --registry=https://registry.npmmirror.com",
+    "curl -fsSL https://npmmirror.com/mirrors/bun/sh/install | bash",
+    "echo 'export BUN_INSTALL=\"${HOME}/.bun\"' >> ~/.bashrc",
+    "echo 'export PATH=\"${BUN_INSTALL}/bin:${PATH}\"' >> ~/.bashrc",
+    "node -v && npm -v && pnpm -v && bun -v"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "npm.packageManager": "pnpm",
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "files.watcherExclude": {
+          "**/node_modules": true,
+          "**/.git/**": true
+        }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  },
+  "runArgs": [
+    "--add-host=host.docker.internal:host-gateway",
+    "--dns=8.8.8.8"
+  ]
 }
