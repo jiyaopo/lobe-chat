@@ -15,7 +15,9 @@
     "curl -fsSL https://npmmirror.com/mirrors/bun/sh/install | bash",
     "echo 'export BUN_INSTALL=\"${HOME}/.bun\"' >> ~/.bashrc",
     "echo 'export PATH=\"${BUN_INSTALL}/bin:${PATH}\"' >> ~/.bashrc",
-    "node -v && npm -v && pnpm -v && bun -v"
+    "node -v && npm -v && pnpm -v && bun -v",
+    "sudo cp /host-certs/* /usr/local/share/ca-certificates/",
+    "sudo update-ca-certificates --fresh"
   ],
   "customizations": {
     "vscode": {
@@ -25,7 +27,8 @@
         "files.watcherExclude": {
           "**/node_modules": true,
           "**/.git/**": true
-        }
+        },
+        "http.proxyStrictSSL": false
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
@@ -35,6 +38,9 @@
   },
   "runArgs": [
     "--add-host=host.docker.internal:host-gateway",
-    "--dns=8.8.8.8"
+    "--dns=8.8.8.8",
+    "--dns=114.114.114.114",
+    "--volume=/Library/Keychains:/host-certs:ro", 
+    
   ]
 }
