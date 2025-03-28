@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node",
   "containerEnv": {
     "HTTP_PROXY": "http://host.docker.internal:7899",
-    "HTTPS_PROXY": "https://host.docker.internal:7899",
+    "HTTPS_PROXY": "http://host.docker.internal:7899",
     "NO_PROXY": "localhost,127.0.0.1,::1,.docker.internal,192.168.65.0/24",
     "NPM_CONFIG_REGISTRY": "https://registry.npmmirror.com",
     "PNPM_CONFIG_REGISTRY": "https://registry.npmmirror.com"
