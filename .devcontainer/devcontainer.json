@@ -3,9 +3,9 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node",
   "postCreateCommand": [
     "npm install -g pnpm@latest-10 --registry=https://registry.npmmirror.com",
-    "curl -fsSL https://npmmirror.com/mirrors/bun/sh/install | bash",
-    "echo 'export BUN_INSTALL=\"${HOME}/.bun\"' >> ~/.bashrc",
-    "echo 'export PATH=\"${BUN_INSTALL}/bin:${PATH}\"' >> ~/.bashrc",
-    "node -v && npm -v && pnpm -v && bun -v"
+    "bash -c 'curl -fsSL https://npmmirror.com/mirrors/bun/sh/install | bash'",
+    "bash -c 'echo \"export BUN_INSTALL=${HOME}/.bun\" >> ${HOME}/.bashrc'",
+    "bash -c 'echo \"export PATH=${BUN_INSTALL}/bin:${PATH}\" >> ${HOME}/.bashrc'",
+    "bash -c 'source ${HOME}/.bashrc && node -v && npm -v && pnpm -v && bun -v'"
   ]
 }
